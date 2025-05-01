@@ -1,5 +1,3 @@
-# --- START OF FILE main.py ---
-
 import logging
 import json
 import os
@@ -9,14 +7,20 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles # <--- Import StaticFiles
+from fastapi.responses import HTMLResponse # <--- Import HTMLResponse (optional but good practice)
 from pydantic import BaseModel
 
 # --- Load Environment Variables ---
 load_dotenv()
 
 # --- Configuration ---
-PERSONA_FILE_PATH = os.getenv("PERSONA_FILE_PATH", "assets/data/persona.txt")
-FAQ_FILE_PATH = os.getenv("FAQ_FILE_PATH", "assets/data/faq.json")
+# Determine the base directory of the project
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend") # <--- Define frontend directory path
+PERSONA_FILE_PATH = os.getenv("PERSONA_FILE_PATH", os.path.join(BASE_DIR, "assets/data/persona.txt"))
+FAQ_FILE_PATH = os.getenv("FAQ_FILE_PATH", os.path.join(BASE_DIR, "assets/data/faq.json"))
+
 MAX_HISTORY_LENGTH = int(os.getenv("MAX_HISTORY_LENGTH", 3)) # Keep history short for FAQ focus
 ASSISTANT_NAME = os.getenv("ASSISTANT_NAME", "Aura") # Match persona name
 GOOGLE_AI_API_KEY = os.environ.get("GOOGLE_AI_API_KEY")
@@ -33,31 +37,31 @@ if not GOOGLE_AI_API_KEY:
 # --- FastAPI App Initialization ---
 app = FastAPI(
     title="FAQ Chatbot API - AuraCoreTech",
-    description="API endpoint for Aura, the AuraCoreTech FAQ-focused AI assistant.",
-    version="1.2.0", # Incremented version
+    description="API endpoint and frontend for Aura, the AuraCoreTech FAQ-focused AI assistant.", # Updated description
+    version="1.3.0", # Incremented version for frontend addition
 )
 
 # --- CORS Middleware ---
-# Adjust origins for your specific frontend deployment
+# Adjust origins for your specific frontend deployment AND local testing
 origins = [
+    # Add the specific origins your browser uses when accessing the server locally
+    "http://localhost:8000",      # If you access via localhost:8000
+    "http://127.0.0.1:8000",     # If you access via 127.0.0.1:8000
     "http://localhost",
-    "http://localhost:8080", # Common local dev port for frontend
     "http://127.0.0.1",
-    "http://127.0.0.1:8080",
-    "http://0.0.0.0:8080", # Included as requested, though browser usually sends specific host
 
-    # Add your deployed frontend URL(s) here
-    "https://auracoretech.com/",
+    # Add your deployed frontend URL(s) here when you deploy
+    "https://auracoretech.com/", # Keep existing if needed
 ]
 
+# ---> NO OTHER CHANGES NEEDED FOR CORS MIDDLEWARE SETUP <---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins, # Allows specified origins
+    allow_origins=origins, # Use the updated list
     allow_credentials=True,
-    allow_methods=["*"], # Allow all methods (GET, POST, etc.)
-    allow_headers=["*"], # Allow all headers
+    allow_methods=["*"], # Allows GET, POST, OPTIONS, etc.
+    allow_headers=["*"], # Allows Content-Type, etc.
 )
-
 # --- Ensure data files exist (or create defaults) ---
 def ensure_file_exists(filepath, default_content=""):
     """Checks if a file exists, creates it with default content if not."""
@@ -69,19 +73,29 @@ def ensure_file_exists(filepath, default_content=""):
                 logger.info(f"Created directory: {dir_name}")
 
             # Special handling if default content is a file path itself
-            if default_content == filepath and not os.path.exists(default_content):
+            if isinstance(default_content, str) and os.path.exists(default_content) and default_content != filepath:
+                 logger.warning(f"Default content for {filepath} points to an existing file: {default_content}. This is unusual, using its path as string.")
+                 content_to_write = default_content
+            elif default_content == filepath and not os.path.exists(default_content):
                  logger.warning(f"Default content for {filepath} points to itself and doesn't exist. Creating empty file.")
                  content_to_write = "" # Create empty instead of writing the path
             else:
                  content_to_write = default_content # Assume it's actual content
 
             with open(filepath, "w", encoding="utf-8") as f:
-                f.write(content_to_write)
+                # Ensure we write a string
+                if isinstance(content_to_write, (dict, list)): # Handle JSON default content better
+                    json.dump(content_to_write, f, indent=2)
+                else:
+                    f.write(str(content_to_write))
+
             logger.warning(f"Created default file: {filepath}. Please ensure content is correct.")
         except IOError as e:
             logger.error(f"Failed to create default file at {filepath}: {e}")
             # Decide if this is critical enough to stop the app
             # raise IOError(f"Could not create essential file: {filepath}") from e
+        except Exception as e: # Catch other potential errors like incorrect default_content type
+             logger.error(f"An unexpected error occurred creating default file {filepath}: {e}")
 
 # Default content strings (placeholders if files are missing)
 default_persona_content = """
@@ -90,8 +104,8 @@ Role: Answer questions based on provided FAQ data.
 Tone: Neutral and informative.
 Instructions: Stick strictly to the FAQ data. If the answer isn't there, state that clearly.
 """
-default_faq_content = """
-{
+# Make sure default FAQ content is a valid JSON string or a dict
+default_faq_content = {
   "title": "Fallback FAQ",
   "instructions": "No specific instructions loaded.",
   "faq_data": {
@@ -101,10 +115,10 @@ default_faq_content = """
     ]
   }
 }
-"""
 
-# Use default *content* if files are missing, not the file path itself
+# Use default *content* if files are missing
 ensure_file_exists(PERSONA_FILE_PATH, default_persona_content)
+# Pass the dictionary directly for JSON content
 ensure_file_exists(FAQ_FILE_PATH, default_faq_content)
 
 
@@ -125,6 +139,8 @@ safety_settings = {
     "DANGEROUS": "BLOCK_MEDIUM_AND_ABOVE",
 }
 
+# --- AI Model Initialization ---
+model = None # Initialize model as None
 try:
     genai.configure(api_key=GOOGLE_AI_API_KEY)
     model = genai.GenerativeModel(
@@ -135,7 +151,8 @@ try:
     logger.info(f"Gemini AI Model '{model.model_name}' configured successfully.")
 except Exception as e:
     logger.error(f"Failed to configure Gemini AI: {e}", exc_info=True)
-    raise RuntimeError(f"Gemini AI configuration failed: {e}")
+    # Don't raise here, allow health check to report the issue
+    # raise RuntimeError(f"Gemini AI configuration failed: {e}")
 
 
 # --- Data Loading Functions ---
@@ -148,17 +165,18 @@ def load_persona_instructions(filename: str = PERSONA_FILE_PATH) -> str:
             instructions = file.read().strip()
             if not instructions:
                 logger.warning(f"Persona file '{filename}' is empty. Using default prompt.")
-                return default_persona_content # Fallback to default content
+                # Make sure default_persona_content is a string here
+                return str(default_persona_content) # Fallback to default content
             logger.info(f"Persona instructions loaded successfully from '{filename}'.")
             return instructions
     except FileNotFoundError:
         logger.error(f"CRITICAL: Persona file not found at {filename}. Using default.")
         # Attempt to create it if ensure_file failed earlier, maybe permissions changed
         ensure_file_exists(filename, default_persona_content)
-        return default_persona_content # Return default content
+        return str(default_persona_content) # Return default content string
     except Exception as e:
         logger.error(f"Error loading persona from {filename}: {e}", exc_info=True)
-        return default_persona_content # Fallback on error
+        return str(default_persona_content) # Fallback on error
 
 @lru_cache(maxsize=1)
 def load_faq_data(filename: str = FAQ_FILE_PATH) -> str:
@@ -168,11 +186,6 @@ def load_faq_data(filename: str = FAQ_FILE_PATH) -> str:
     try:
         with open(filename, "r", encoding="utf-8") as file:
             data = json.load(file)
-
-            # Optional: Include the main instructions from the JSON if needed
-            # json_instructions = data.get("instructions", "")
-            # if json_instructions:
-            #     faq_context_lines.append(f"FAQ Instructions: {json_instructions}\n")
 
             faq_data = data.get("faq_data", {}) # Expecting the 'faq_data' object
             if not faq_data:
@@ -185,7 +198,7 @@ def load_faq_data(filename: str = FAQ_FILE_PATH) -> str:
                     faq_context_lines.append(f"\n## Section: {section_title}\n")
                     for i, qa_pair in enumerate(qa_list, 1):
                         if isinstance(qa_pair, list) and len(qa_pair) == 2:
-                            q, a = qa_pair
+                            q, a = map(str, qa_pair) # Ensure Q and A are strings
                             faq_context_lines.append(f"{i}. Q: {q}\n   A: {a}")
                         else:
                              logger.warning(f"Skipping malformed QA pair in section '{section_title}': {qa_pair}")
@@ -196,7 +209,7 @@ def load_faq_data(filename: str = FAQ_FILE_PATH) -> str:
                               faq_context_lines.append(f"### Subsection: {sub_section_title}\n")
                               for i, qa_pair in enumerate(sub_qa_list, 1):
                                    if isinstance(qa_pair, list) and len(qa_pair) == 2:
-                                       q, a = qa_pair
+                                       q, a = map(str, qa_pair) # Ensure Q and A are strings
                                        faq_context_lines.append(f"{i}. Q: {q}\n   A: {a}")
                                    else:
                                        logger.warning(f"Skipping malformed QA pair in subsection '{section_title}/{sub_section_title}': {qa_pair}")
@@ -213,7 +226,7 @@ def load_faq_data(filename: str = FAQ_FILE_PATH) -> str:
     except FileNotFoundError:
         logger.error(f"CRITICAL: FAQ file not found: {filename}. Chatbot will lack context.")
          # Attempt to create it if ensure_file failed earlier
-        ensure_file_exists(filename, default_faq_content)
+        ensure_file_exists(filename, default_faq_content) # Pass dict here
         return "(FAQ file missing - using fallback)"
     except json.JSONDecodeError as e:
         logger.error(f"Invalid JSON in FAQ file: {filename}. Error: {e}. FAQ context unavailable.")
@@ -231,6 +244,11 @@ conversation_history = []
 def generate_bot_response(question: str, persona_instructions: str, faq_context: str) -> str:
     """Generates a response using AI, focusing on persona and provided FAQs."""
     global conversation_history
+    global model # Access the globally defined model
+
+    if not model:
+        logger.error("AI model is not initialized. Cannot generate response.")
+        return "[System Error: AI Model not available. Please check configuration.]"
 
     # Build the prompt with clear sections
     prompt_lines = [
@@ -238,8 +256,9 @@ def generate_bot_response(question: str, persona_instructions: str, faq_context:
         f"Your name is {ASSISTANT_NAME}.", # Explicitly state name if not in persona text
         persona_instructions,
         "You MUST answer questions based *only* on the information provided in the 'Company FAQ Information' section below.",
-        "If the answer is not found in the FAQ information, clearly state that you don't have information on that topic based on the provided context and suggest contacting AuraCoreTech directly.",
+        "If the answer is not found in the FAQ information, clearly state that you don't have information on that topic based on the provided context and suggest contacting AuraCoreTech directly for more details.", # Added suggestion
         "Do not invent information or use external knowledge.",
+        "Keep your answers concise and directly relevant to the question.", # Added conciseness instruction
         "END OF ASSISTANT INSTRUCTIONS",
         "\n",
         "--- Company FAQ Information ---",
@@ -250,13 +269,11 @@ def generate_bot_response(question: str, persona_instructions: str, faq_context:
     ]
 
     # Add limited history
-    # Create pairs of (user_message, bot_response) for history context
     history_pairs = []
-    temp_history = conversation_history[:] # Work with a copy
-    while len(temp_history) > MAX_HISTORY_LENGTH:
-        temp_history.pop(0)
+    # Ensure history doesn't exceed max length dynamically
+    relevant_history = conversation_history[-(MAX_HISTORY_LENGTH):]
 
-    for q_hist, a_hist in temp_history:
+    for q_hist, a_hist in relevant_history:
          history_pairs.append(f"User: {q_hist}")
          history_pairs.append(f"{ASSISTANT_NAME}: {a_hist}")
 
@@ -276,44 +293,46 @@ def generate_bot_response(question: str, persona_instructions: str, faq_context:
     # logger.debug(f"Prompt sent to AI:\n-------\n{full_prompt}\n-------") # Uncomment for deep debugging if needed
 
     try:
-        # Use the model variable directly
         response = model.generate_content(full_prompt)
-
         answer = ""
         # Safely extract text, checking for potential blocks
         if not response.candidates:
              logger.warning("AI response has no candidates. Check safety settings or prompt complexity.")
-             # Check for blocking reasons if available
              block_reason = "Unknown"
-             try:
-                 # Accessing safety feedback correctly
-                 if response.prompt_feedback.block_reason:
-                      block_reason = response.prompt_feedback.block_reason.name
-             except AttributeError:
-                 pass # No feedback available or structure differs
-             answer = f"(I'm unable to provide a response based on the current safety settings ({block_reason}). Please rephrase your question or ask about topics covered in our FAQ.)"
-        elif response.parts:
+             try: # Correctly access prompt_feedback if available
+                 if hasattr(response, 'prompt_feedback') and response.prompt_feedback and hasattr(response.prompt_feedback, 'block_reason'):
+                     block_reason = response.prompt_feedback.block_reason.name
+             except Exception as fb_error:
+                 logger.warning(f"Could not determine block reason: {fb_error}")
+             answer = f"(I'm unable to provide a response due to content safety filters ({block_reason}). Please rephrase your question, focusing on topics covered in our FAQs.)"
+
+        # Iterate through parts if they exist and have text
+        elif hasattr(response, 'parts') and response.parts:
              answer = "".join(part.text for part in response.parts if hasattr(part, 'text'))
+        # Fallback for simpler response structures (like older API versions or different models)
         elif hasattr(response, 'text'):
-             answer = response.text # Fallback if parts structure isn't used
+             answer = response.text
 
         # Handle cases where generation succeeds but text is empty
-        if not answer.strip(): # Check if the stripped answer is empty
+        if not answer or not answer.strip(): # Check if the answer is None or empty string after stripping
              logger.warning("AI response was generated but contained no meaningful text.")
-             answer = "(I could not generate a specific answer for that query based on the provided FAQs. Could you please ask differently?)"
+             answer = "(I could not generate a specific answer for that query based on the provided FAQs. Could you please ask differently or check if the topic is covered in our documentation?)"
 
         # Update history list (only store valid Q&A)
         conversation_history.append((question, answer))
-        # Prune history (already handled by slicing when building prompt, but good practice here too)
+        # Prune history to maintain max length (ensure it doesn't grow indefinitely)
         while len(conversation_history) > MAX_HISTORY_LENGTH:
              conversation_history.pop(0) # Remove oldest Q&A pair
 
         return answer.strip()
 
+    except ValueError as ve: # Catch specific API errors like invalid arguments
+        logger.error(f"ValueError during AI API call: {str(ve)}", exc_info=True)
+        return "[System Error: There was an issue processing the request with the AI service (Invalid Input). Please check the logs.]"
     except Exception as e:
         logger.error(f"Error during AI API call or processing: {str(e)}", exc_info=True)
         # Provide a generic system error message
-        return "[System Error: I encountered a problem trying to generate a response. Please try again in a moment.]"
+        return "[System Error: I encountered a problem trying to generate a response. Please try again in a moment or contact support if the issue persists.]"
 
 
 # --- Pydantic Models for API Validation ---
@@ -326,7 +345,9 @@ class ChatResponse(BaseModel):
     context_cleared: bool = False
 
 
-# --- API Endpoint ---
+# --- API Endpoints ---
+
+# API Chat Endpoint
 @app.post("/api/chat",
           response_model=ChatResponse,
           summary="Process FAQ Chat Message with Aura",
@@ -338,7 +359,7 @@ async def api_chat(
 ):
     """
     Receives user message, uses Aura's persona and AuraCoreTech FAQ data
-    to generate a context-aware response.
+    to generate a context-aware response. Optionally resets conversation history.
     """
     global conversation_history
     context_cleared = False
@@ -347,7 +368,7 @@ async def api_chat(
         conversation_history = []
         logger.info("Conversation history reset via API request.")
         context_cleared = True
-        # Return immediately after reset
+        # Return immediately after reset with a welcoming message
         return ChatResponse(
             response=f"Hello! I'm {ASSISTANT_NAME}. The chat context has been reset. How can I help you based on our FAQs?",
             context_cleared=True
@@ -363,8 +384,7 @@ async def api_chat(
     logger.info(f"Generated response: '{answer[:100]}...'") # Log start of response
     return ChatResponse(response=answer, context_cleared=context_cleared)
 
-
-# --- Health Check Endpoint ---
+# Health Check Endpoint
 @app.get("/health",
          status_code=200,
          summary="Health Check",
@@ -372,11 +392,14 @@ async def api_chat(
          response_description="Returns the operational status of the API.")
 async def health_check():
     """Basic health check including data file accessibility and AI model status."""
+    global model # Access global model
     persona_ok = False
     faq_ok = False
     model_ok = False
+    model_name = "Not Initialized"
+
+    # Check data file loading (uses cache if already loaded)
     try:
-        # Use the loading functions to check accessibility (uses cache)
         load_persona_instructions()
         persona_ok = True
     except Exception as e:
@@ -387,22 +410,57 @@ async def health_check():
     except Exception as e:
         logger.warning(f"Health check: FAQ file issue - {e}")
 
-    # Simple check if the model object exists
-    if 'model' in globals() and model is not None:
+    # Check if the model object exists and seems configured
+    if model is not None and hasattr(model, 'model_name'):
          model_ok = True
          model_name = model.model_name
-    else:
-         model_name = "Not Initialized"
+    elif GOOGLE_AI_API_KEY and not model: # Check if API key exists but model failed init
+         model_ok = False
+         model_name = "Initialization Failed (Check Logs)"
+    elif not GOOGLE_AI_API_KEY:
+         model_ok = False
+         model_name = "Configuration Error (API Key Missing)"
 
+
+    status_code = 200 if persona_ok and faq_ok and model_ok else 503 # Service Unavailable if core components fail
+
+    # Manually set status code in response if needed, though FastAPI handles it based on exceptions
+    # response.status_code = status_code
 
     return {
-        "status": "ok",
-        "model_status": "configured" if model_ok else "error",
-        "model_name": model_name,
-        "persona_file_accessible": persona_ok,
-        "faq_data_accessible": faq_ok,
-        "current_history_length": len(conversation_history)
+        "status": "ok" if status_code == 200 else "error",
+        "details": {
+             "model_status": "configured" if model_ok else "error",
+             "model_name": model_name,
+             "persona_file_accessible": persona_ok,
+             "faq_data_accessible": faq_ok,
+             "current_history_length": len(conversation_history)
         }
+    }
+
+# --- Serve Frontend Static Files ---
+# This mount point MUST be defined *after* specific API routes like /api/chat and /health
+# It serves files from the 'frontend' directory. The `html=True` argument
+# ensures that accessing the root ("/") serves 'frontend/index.html'.
+if os.path.exists(FRONTEND_DIR) and os.path.isdir(FRONTEND_DIR):
+    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
+    logger.info(f"Serving static files from directory: {FRONTEND_DIR}")
+else:
+    logger.warning(f"Frontend directory '{FRONTEND_DIR}' not found. Static file serving disabled.")
+    # Optionally, add a root route to inform the user if the frontend is missing
+    @app.get("/", response_class=HTMLResponse, include_in_schema=False)
+    async def read_root_fallback():
+        return """
+        <html>
+            <head><title>AuraCoreTech API</title></head>
+            <body>
+                <h1>AuraCoreTech FAQ Chatbot API</h1>
+                <p>API is running, but the frontend directory was not found.</p>
+                <p>Check API documentation at <a href="/docs">/docs</a>.</p>
+            </body>
+        </html>
+        """
+
 
 # --- Main Execution Guard ---
 if __name__ == "__main__":
