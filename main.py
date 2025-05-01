@@ -47,7 +47,7 @@ origins = [
     "http://0.0.0.0:8080", # Included as requested, though browser usually sends specific host
 
     # Add your deployed frontend URL(s) here
-    # e.g., "https://your-frontend-domain.com",
+    "https://auracoretech.com/",
 ]
 
 app.add_middleware(
