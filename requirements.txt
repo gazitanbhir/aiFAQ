@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+google-generativeai
+pydantic
+requests # Good practice, though not strictly used in the current backend code
