@@ -2,31 +2,20 @@
     "faqs": [
       {
         "question": "What are your business hours?",
-        "answer": "Our standard business hours are Monday to Friday, 9:00 AM to 5:00 PM local time. We are closed on weekends and major public holidays."
+        "answer": "Our office hours are Monday to Friday, 9:00 AM to 5:00 PM EST."
       },
       {
         "question": "How can I reset my password?",
-        "answer": "To reset your password, please visit the login page and click the 'Forgot Password?' link. You will receive an email with instructions to set a new password."
+        "answer": "You can reset your password by clicking the 'Forgot Password' link on the login page and following the instructions sent to your email."
       },
       {
-        "question": "What is your return policy?",
-        "answer": "Items can be returned within 30 days of purchase if they are unused, in their original packaging, and with proof of purchase. Some exclusions apply, such as final sale items. Please visit [Your Website]/returns for full details."
-      },
-      {
-          "question": "Where are you located?",
-          "answer": "Our main office is located at 123 Business Parkway, Suite 450, Commerce City, ST 12345. Please note that this is not a retail location and is not open to the public."
-      },
-      {
-          "question": "How do I contact customer support?",
-          "answer": "You can reach our customer support team by email at support@[yourcompanydomain].com or by calling 1-800-555-FAQ1 (1-800-555-3271) during our business hours (Mon-Fri, 9 AM - 5 PM)."
-      },
-      {
-          "question": "Do you ship internationally?",
-          "answer": "Currently, we only ship to addresses within the United States and Canada. We are hoping to expand our shipping options in the future."
-      },
-      {
-          "question": "How can I track my order?",
-          "answer": "Once your order ships, you will receive a shipping confirmation email containing a tracking number. You can use this number on the carrier's website (e.g., UPS, FedEx) to track your package."
+          "question": "Do you offer international shipping?",
+          "answer": "Currently, we only ship within the United States. We are exploring options for international shipping in the future."
       }
+        ,
+        {
+            "question": "How can I contact customer support?",
+            "answer": "You can reach our customer support team via email at test@gmail.com"
+        }
     ]
   }

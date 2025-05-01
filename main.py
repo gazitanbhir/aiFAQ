@@ -73,8 +73,8 @@ def ensure_file_exists(filepath, default_content=""):
             # Decide if this is critical enough to stop the app
             # raise IOError(f"Could not create essential file: {filepath}") from e
 
-default_persona = """You are a helpful AI assistant. Answer questions based on provided FAQs. If the answer isn't in the FAQs, say you don't have that information."""
-default_faq = """{"faqs": [{"question": "Example Question?", "answer": "This is a default answer. Please replace faq.json."}]}"""
+default_persona = PERSONA_FILE_PATH
+default_faq = FAQ_FILE_PATH
 
 ensure_file_exists(PERSONA_FILE_PATH, default_persona)
 ensure_file_exists(FAQ_FILE_PATH, default_faq)
@@ -84,7 +84,7 @@ generation_config = {
     "temperature": 0.3, # Lower temperature for more factual, less creative responses suitable for FAQs
     "top_p": 0.95,
     "top_k": 40,
-    "max_output_tokens": 300, # Adjust as needed based on typical answer length
+    "max_output_tokens": 200, # Adjust as needed based on typical answer length
     "response_mime_type": "text/plain",
 }
 
