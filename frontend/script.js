@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // For local testing with backend running on port 8000:
     // const API_ENDPOINT = 'http://localhost:8000/api/chat';
     // Example for a Render deployment:
-    const API_ENDPOINT = 'http://127.0.0.1:8000/api/chat';
+    const API_ENDPOINT = 'https://ai-faq-red.vercel.app/api/chat';
     // Function to add a message to the chat box
     function addMessage(text, sender) {
         const messageElement = document.createElement('div');
