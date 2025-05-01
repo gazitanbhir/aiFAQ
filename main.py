@@ -42,16 +42,18 @@ origins = [
     "http://localhost:8080", # Common local dev port for frontend
     "http://127.0.0.1",
     "http://127.0.0.1:8080",
+    "http://0.0.0.0:8080", # <--- ADD THIS LINE
+
     # Add your deployed frontend URL(s) here
-    # "https://your-frontend-domain.com",
+    "https://auracoretech.com/",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins, # Now includes the origin the browser is reporting
     allow_credentials=True,
-    allow_methods=["POST", "GET", "OPTIONS"], # Allow POST, GET (for health), OPTIONS (for preflight)
-    allow_headers=["*"],
+    allow_methods=["*"], # Allow all methods
+    allow_headers=["*"], # Allow all headers
 )
 
 # --- Ensure data files exist (or create defaults) ---
