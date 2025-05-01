@@ -1,19 +1,19 @@
 {
-  "title": "AuraCoreTech FAQ Context",
-  "instructions": "Use the following question-and-answer pairs as the primary source of information to respond to user queries about AuraCoreTech's services and operations. Answer based *only* on this provided context.",
+  "title": "AuraCoreTech Simplified FAQ",
+  "instructions": "Answer based *only* on the Q&A pairs listed under each section.",
   "faq_data": {
     "Video Editing": [
       ["What types of video editing services do you offer?", "We offer promotional videos, corporate edits, social media reels, explainers, and motion graphics."],
       ["Which software do you use for video editing?", "Our editors work with Adobe Premiere Pro, After Effects, DaVinci Resolve, and Final Cut Pro."],
       ["Can you add subtitles and translations to videos?", "Yes, we provide accurate subtitles and multilingual translations as needed."],
       ["Do you offer animation or motion graphics?", "Absolutely, we create animated intros, logo reveals, explainer videos, and kinetic typography."],
-      ["Can you edit vertical videos for platforms like TikTok or Instagram Reels?", "Yes, we optimize videos for all platforms including Instagram, TikTok, and YouTube Shorts."],
-      ["How long does a typical video project take?", "Depending on length and complexity, it usually takes 3–7 days."],
-      ["Can you work with footage I provide?", "Yes, we can work with raw footage from your camera, phone, or screen recordings."],
-      ["Do you provide voiceover services?", "Yes, we offer professional voiceovers in multiple languages and accents."],
+      ["Can you edit vertical videos?", "Yes, we optimize videos for all platforms including Instagram, TikTok, and YouTube Shorts."],
+      ["Typical video project duration?", "Depending on length and complexity, it usually takes 3–7 days."],
+      ["Can you use my footage?", "Yes, we can work with raw footage from your camera, phone, or screen recordings."],
+      ["Do you offer voiceovers?", "Yes, we offer professional voiceovers in multiple languages and accents."],
       ["Can I request revisions?", "Yes, we typically offer up to 3 rounds of revisions depending on your package."],
-      ["Do you provide export in multiple formats?", "Yes, we deliver in MP4, MOV, and social-ready formats like 1:1, 16:9, and 9:16."],
-      ["Can you sync video edits with background music?", "Absolutely, we match pacing, mood, and transitions with licensed music that fits your brand."]
+      ["What export formats are provided?", "Yes, we deliver in MP4, MOV, and social-ready formats like 1:1, 16:9, and 9:16."],
+      ["Do you sync video with music?", "Absolutely, we match pacing, mood, and transitions with licensed music that fits your brand."]
     ],
     "Company Overview": [
       ["What is AuraCoreTech?", "AuraCoreTech is a full-service IT and software development company providing innovative, scalable, and secure technology solutions for businesses worldwide."],
@@ -30,151 +30,147 @@
       ["How do you ensure software scalability?", "We use modular architecture, containerization, and cloud-native design to ensure your software grows with your business."]
     ],
     "Web Development": [
-      ["What technologies do you use for web development?", "We use technologies like React, Vue.js, Laravel, Django, Node.js, and WordPress, tailored to your project needs."],
-      ["Do you develop eCommerce websites?", "Yes, we build secure, high-converting eCommerce platforms using WooCommerce, Shopify, Magento, and custom stacks."],
-      ["Can you redesign my existing website?", "Yes, we offer full UI/UX redesigns backed by performance optimization and SEO best practices."],
+      ["Web development technologies?", "We use technologies like React, Vue.js, Laravel, Django, Node.js, and WordPress, tailored to your project needs."],
+      ["Do you build eCommerce websites?", "Yes, we build secure, high-converting eCommerce platforms using WooCommerce, Shopify, Magento, and custom stacks."],
+      ["Can you redesign my website?", "Yes, we offer full UI/UX redesigns backed by performance optimization and SEO best practices."],
       ["Are your websites mobile-friendly?", "Absolutely. All our websites are responsive, ensuring seamless experience across all screen sizes."],
       ["Do you offer CMS integration?", "Yes, we integrate powerful content management systems to give you full control over your site’s content."],
-      ["What is included in your web development service?", "We offer front-end and back-end development, SEO, analytics integration, responsive design, and more."],
-      ["How long does it take to build a website?", "Typical turnaround is 4-8 weeks depending on complexity."],
-      ["Do you provide hosting services?", "We can help set up hosting or manage deployments through AWS, DigitalOcean, or other cloud platforms."],
-      ["What CMS platforms do you support?", "We work with WordPress, Webflow, Ghost, and also build headless CMS setups."],
-      ["Can you migrate my existing website?", "Yes, we offer full-site migrations including domain, content, and functionality."],
-      ["Do you build custom websites or use templates?", "We build from scratch based on your brand needs and UX goals, though we can also customize templates when needed."],
-      ["Can I update my website content myself?", "Yes, with a CMS in place, you'll be able to manage content easily."],
-      ["Do you optimize websites for speed?", "Absolutely, we implement caching, code splitting, lazy loading, and more to ensure fast performance."],
-      ["Do you ensure cross-browser compatibility?", "Yes, we test and optimize your site to work seamlessly across all major browsers."],
-      ["Is SSL included in your web development?", "Yes, we ensure your site has HTTPS encryption using SSL certificates."],
-      ["Can you integrate third-party services like CRMs or payment gateways?", "Yes, we regularly integrate tools like Stripe, HubSpot, Salesforce, and more."]
+      ["What's included in web development?", "We offer front-end and back-end development, SEO, analytics integration, responsive design, and more."],
+      ["Website build time?", "Typical turnaround is 4-8 weeks depending on complexity."],
+      ["Do you provide hosting?", "We can help set up hosting or manage deployments through AWS, DigitalOcean, or other cloud platforms."],
+      ["Supported CMS platforms?", "We work with WordPress, Webflow, Ghost, and also build headless CMS setups."],
+      ["Can you migrate my website?", "Yes, we offer full-site migrations including domain, content, and functionality."],
+      ["Custom websites or templates?", "We build from scratch based on your brand needs and UX goals, though we can also customize templates when needed."],
+      ["Can I update website content myself?", "Yes, with a CMS in place, you'll be able to manage content easily."],
+      ["Do you optimize for speed?", "Absolutely, we implement caching, code splitting, lazy loading, and more to ensure fast performance."],
+      ["Cross-browser compatibility?", "Yes, we test and optimize your site to work seamlessly across all major browsers."],
+      ["Is SSL included?", "Yes, we ensure your site has HTTPS encryption using SSL certificates."],
+      ["Third-party integrations (CRM, payments)?", "Yes, we regularly integrate tools like Stripe, HubSpot, Salesforce, and more."]
     ],
     "App Development": [
-      ["Do you build both Android and iOS apps?", "Yes, we use Flutter to create cross-platform mobile apps for Android and iOS."],
-      ["How long does it take to build a mobile app?", "Project duration typically ranges from 6 to 16 weeks depending on complexity and features."],
+      ["Do you build Android and iOS apps?", "Yes, we use Flutter to create cross-platform mobile apps for Android and iOS."],
+      ["Mobile app build time?", "Project duration typically ranges from 6 to 16 weeks depending on complexity and features."],
       ["Can you develop native apps?", "Yes, we develop both native and hybrid apps based on project requirements."],
-      ["What technologies do you use for mobile development?", "We primarily use Flutter, React Native, Kotlin, Swift, and Firebase."],
+      ["Mobile development technologies?", "We primarily use Flutter, React Native, Kotlin, Swift, and Firebase."],
       ["Can I preview the app during development?", "Yes, we provide test builds at every major milestone for feedback and validation."],
-      ["Do you assist with App Store and Google Play submission?", "Absolutely. We handle the entire publishing process including store listing optimization."],
+      ["App store submission assistance?", "Absolutely. We handle the entire publishing process including store listing optimization."],
       ["How do you ensure app performance?", "We follow best practices for code optimization, caching, load handling, and use analytics to monitor performance."],
       ["Is post-launch support included?", "Yes, we provide 30–90 days of free post-launch support, plus optional ongoing maintenance plans."],
-      ["Can I track the progress of my app development?", "Yes, we use project management tools like Trello, ClickUp, or Jira to keep you informed."],
-      ["Can you integrate third-party APIs in the app?", "Absolutely. We regularly integrate payment gateways, social logins, CRM systems, and more."],
-      ["Will I own the app and source code?", "Yes, all IP rights and source code are handed over to you after final project delivery."]
+      ["Can I track app development progress?", "Yes, we use project management tools like Trello, ClickUp, or Jira to keep you informed."],
+      ["Third-party API integration in apps?", "Absolutely. We regularly integrate payment gateways, social logins, CRM systems, and more."],
+      ["Will I own the app source code?", "Yes, all IP rights and source code are handed over to you after final project delivery."]
     ],
     "Graphic Design": [
-      ["What types of graphic design services do you offer?", "We provide logo design, marketing materials, branding kits, infographics, and social media creatives."],
+      ["Graphic design services offered?", "We provide logo design, marketing materials, branding kits, infographics, and social media creatives."],
       ["Can I request a custom logo?", "Yes, we offer custom logo design services that reflect your brand's identity and market positioning."],
-      ["What file formats do you deliver?", "We deliver source files in AI, PSD, SVG, PDF, PNG, and JPEG formats."],
+      ["What file formats are delivered?", "We deliver source files in AI, PSD, SVG, PDF, PNG, and JPEG formats."],
       ["How many revisions are included?", "We typically offer up to 3 revisions per project, but this can be adjusted based on your plan."],
       ["Do you create social media posts?", "Yes, we create visually appealing posts for platforms like Instagram, Facebook, and LinkedIn."],
-      ["Can you design my pitch deck or presentation slides?", "Absolutely. We design business decks, proposals, and investor presentations."],
-      ["What tools do your designers use?", "Our designers use Adobe Illustrator, Photoshop, Figma, and Canva Pro depending on project needs."],
+      ["Can you design pitch decks/slides?", "Absolutely. We design business decks, proposals, and investor presentations."],
+      ["Design tools used?", "Our designers use Adobe Illustrator, Photoshop, Figma, and Canva Pro depending on project needs."],
       ["Do you offer print-ready designs?", "Yes, we provide high-resolution, print-ready files suitable for any medium."],
-      ["Can you match my existing branding?", "Yes, we align all designs with your existing color scheme, fonts, and style guides."],
+      ["Can you match existing branding?", "Yes, we align all designs with your existing color scheme, fonts, and style guides."],
       ["Do you create brand guidelines?", "Yes, we can create a full brand kit that includes logos, fonts, colors, and usage rules."],
-      ["How do you ensure originality in your designs?", "All our designs are created in-house, tailored uniquely for each client, and undergo plagiarism checks."]
+      ["How do you ensure design originality?", "All our designs are created in-house, tailored uniquely for each client, and undergo plagiarism checks."]
     ],
     "UI/UX Design": [
-      ["What is UI/UX design and why is it important?", "UI focuses on the look and layout of the product, while UX ensures usability and functionality. Together, they create intuitive digital experiences."],
-      ["What tools do you use for UI/UX design?", "We primarily use Figma, Adobe XD, and InVision for designing interfaces and prototyping."],
+      ["What is UI/UX design and why important?", "UI focuses on the look and layout, while UX ensures usability and functionality, creating intuitive digital experiences."],
+      ["UI/UX design tools?", "We primarily use Figma, Adobe XD, and InVision for designing interfaces and prototyping."],
       ["Do you provide interactive prototypes?", "Yes, we provide clickable prototypes so you can test workflows and visual flows before development."],
-      ["Can you redesign my existing app or website?", "Absolutely. We specialize in redesigning digital platforms to improve user retention and aesthetics."],
+      ["Can you redesign existing apps/websites?", "Absolutely. We specialize in redesigning digital platforms to improve user retention and aesthetics."],
       ["Do you conduct usability testing?", "Yes, we perform usability tests to ensure our designs work for your target audience."],
       ["How do you gather user feedback?", "We use surveys, user interviews, and analytics to understand user behavior and expectations."],
-      ["Will I get design files after the project?", "Yes, we provide all editable source files including Figma, XD, or PSD."],
-      ["Can you follow my existing brand guidelines?", "Yes, we adhere strictly to your brand's identity, colors, fonts, and tone."],
-      ["Do you support accessibility in design?", "Yes, we design with WCAG standards in mind to ensure accessibility for all users."],
-      ["How long does a typical UI/UX design project take?", "Depending on complexity, it may take 1 to 4 weeks."],
+      ["Will I get design source files?", "Yes, we provide all editable source files including Figma, XD, or PSD."],
+      ["Can you follow existing brand guidelines?", "Yes, we adhere strictly to your brand's identity, colors, fonts, and tone."],
+      ["Do you support accessibility (WCAG)?", "Yes, we design with WCAG standards in mind to ensure accessibility for all users."],
+      ["Typical UI/UX project duration?", "Depending on complexity, it may take 1 to 4 weeks."],
       ["Can you help define the user journey?", "Absolutely, we map out user journeys and information architecture to support seamless user interactions."]
     ],
     "Digital Marketing": [
-      ["What digital marketing services do you offer?", "We provide SEO, PPC, social media management, email marketing, content strategy, and analytics."],
-      ["How does SEO help my business?", "SEO improves your visibility in search engines, driving organic traffic and qualified leads."],
-      ["Do you manage Google Ads or Facebook Ads?", "Yes, we create and manage campaigns across Google, Facebook, Instagram, LinkedIn, and more."],
-      ["Can you help me with local SEO?", "Absolutely. We optimize your website for local search and manage Google Business Profiles."],
-      ["Do you write content too?", "Yes, our team crafts SEO-optimized blog posts, landing pages, and ad copy."],
-      ["How do you measure campaign performance?", "We use tools like Google Analytics, Search Console, and Data Studio to track KPIs and generate detailed reports."],
+      ["Digital marketing services offered?", "We provide SEO, PPC, social media management, email marketing, content strategy, and analytics."],
+      ["How does SEO help?", "SEO improves visibility in search engines, driving organic traffic and qualified leads."],
+      ["Do you manage Google/Facebook Ads?", "Yes, we create and manage campaigns across Google, Facebook, Instagram, LinkedIn, and more."],
+      ["Can you help with local SEO?", "Absolutely. We optimize your website for local search and manage Google Business Profiles."],
+      ["Do you write content?", "Yes, our team crafts SEO-optimized blog posts, landing pages, and ad copy."],
+      ["How is campaign performance measured?", "We use tools like Google Analytics, Search Console, and Data Studio to track KPIs and generate detailed reports."],
       ["Do you offer social media marketing?", "Yes, we manage posting schedules, community engagement, and ad campaigns for all major social platforms."],
-      ["What platforms do you support for PPC?", "We support Google Ads, Bing Ads, Meta Ads (Facebook/Instagram), LinkedIn, and Twitter/X."],
-      ["Can you guarantee ranking on Google?", "No ethical agency can guarantee rankings, but we follow proven white-hat SEO methods to consistently improve performance."],
+      ["Supported PPC platforms?", "We support Google Ads, Bing Ads, Meta Ads (Facebook/Instagram), LinkedIn, and Twitter/X."],
+      ["Can you guarantee Google rankings?", "No ethical agency can guarantee rankings, but we follow proven white-hat SEO methods to consistently improve performance."],
       ["Do you handle email marketing?", "Yes, we design campaigns, set up automation flows, and segment lists using platforms like Mailchimp, Klaviyo, and HubSpot."],
-      ["How often will I receive marketing reports?", "We provide detailed reports weekly or monthly, based on your preference, with performance insights and strategy updates."]
+      ["How often are marketing reports provided?", "We provide detailed reports weekly or monthly, based on your preference, with performance insights and strategy updates."]
     ],
     "Client Onboarding Process": [
-      ["What is your client onboarding process like?", "We follow a structured 5-step onboarding: discovery → scoping → agreement → kickoff → project dashboard setup."],
-      ["What happens during the discovery call?", "We explore your business needs, challenges, goals, and timelines. It helps us understand your vision before proposing a solution."],
-      ["Will I get a detailed proposal before signing?", "Yes, we deliver a customized proposal with scope, timelines, pricing, milestones, and tech stack recommendations."],
-      ["How do you finalize the project scope?", "We hold collaborative sessions and deliver an SRS (Software Requirements Specification) document to lock the scope."],
-      ["Do you provide a project timeline during onboarding?", "Absolutely. We create a Gantt-style timeline with estimated delivery dates for each milestone."],
-      ["What contracts or documents do I need to sign?", "You’ll typically sign a Master Service Agreement (MSA), NDA, and a Project Agreement with Exhibits (A-Z)."],
-      ["Will I get access to a project dashboard?", "Yes, we use tools like ClickUp, Notion, or Jira where you can track real-time progress, files, and communications."],
-      ["Who will be my point of contact after onboarding?", "You’ll be assigned a dedicated project manager who will be your primary communication bridge with the development team."],
-      ["How do you handle communication post-onboarding?", "We establish structured communication via email, Slack, and weekly/bi-weekly review calls."],
-      ["Can I request changes after onboarding is complete?", "Yes. We handle all change requests through a formal Change Request Order process, defined in Exhibit G."],
-      ["How long does onboarding typically take?", "It typically takes 3–7 business days depending on project complexity and response time from the client."],
-      ["What’s expected from me during onboarding?", "You’ll need to provide business insights, project materials (if any), timeline expectations, and decision-making availability."]
+      ["Client onboarding process?", "We follow a structured 5-step onboarding: discovery → scoping → agreement → kickoff → project dashboard setup."],
+      ["What happens during discovery call?", "We explore your business needs, challenges, goals, and timelines to understand your vision."],
+      ["Will I get a detailed proposal?", "Yes, we deliver a customized proposal with scope, timelines, pricing, milestones, and tech stack recommendations."],
+      ["How is project scope finalized?", "We hold collaborative sessions and deliver an SRS (Software Requirements Specification) document to lock the scope."],
+      ["Is a project timeline provided?", "Absolutely. We create a Gantt-style timeline with estimated delivery dates for each milestone."],
+      ["Contracts/documents to sign?", "You’ll typically sign a Master Service Agreement (MSA), NDA, and a Project Agreement with Exhibits (A-Z)."],
+      ["Will I get project dashboard access?", "Yes, we use tools like ClickUp, Notion, or Jira for real-time progress tracking."],
+      ["Point of contact after onboarding?", "You’ll be assigned a dedicated project manager as your primary communication bridge."],
+      ["Communication post-onboarding?", "Structured communication via email, Slack, and weekly/bi-weekly review calls."],
+      ["Can I request changes after onboarding?", "Yes, via a formal Change Request Order process (Exhibit G)."],
+      ["Onboarding duration?", "Typically 3–7 business days, depending on complexity and client response time."],
+      ["What's expected from me during onboarding?", "Provide business insights, project materials, timeline expectations, and decision-making availability."]
     ],
     "Technology Expertise": [
-      ["What programming languages does your team specialize in?", "We work with Python, JavaScript, TypeScript, PHP, Dart, Kotlin, and Swift — depending on the use case and platform."],
-      ["What front-end frameworks do you use?", "We use React, Next.js, Vue.js, and Svelte — optimized for responsive, fast-loading web apps."],
-      ["What back-end technologies do you prefer?", "Our primary back-end stacks include Node.js, Django (Python), Laravel (PHP), and Firebase (serverless architecture)."],
-      ["Do you build mobile apps with native or cross-platform tech?", "Both. We use Flutter and React Native for cross-platform development, and Kotlin/Swift for native apps when required."],
-      ["What database technologies do you use?", "We work with PostgreSQL, MySQL, MongoDB, Firebase Realtime DB, and Redis — based on project architecture."],
-      ["Do you provide cloud-native architecture?", "Yes, we architect apps for AWS, GCP, Azure, and DigitalOcean — with CI/CD pipelines, containers, and infrastructure as code."],
-      ["Can you work with microservices or monolithic architecture?", "Yes. We design systems using microservices for scalable projects, or monoliths for smaller, simpler apps."],
-      ["Do you implement containerization or DevOps pipelines?", "Absolutely. We use Docker, Kubernetes, GitHub Actions, GitLab CI/CD, and Terraform for robust DevOps pipelines."],
-      ["What CMS systems do you support?", "We support WordPress, Webflow, Strapi, Ghost, and build headless CMS systems where performance matters most."],
-      ["Do you offer AI/ML integration in software?", "Yes, we integrate ML models using Python (TensorFlow, Scikit-learn), OpenAI APIs, and chatbot solutions for automation."],
-      ["What analytics or data visualization tools do you implement?", "We integrate tools like Google Analytics, Amplitude, Mixpanel, and dashboards using D3.js or Chart.js."],
-      ["Do you follow coding standards and best practices?", "Absolutely. We enforce linting, code reviews, test coverage, and follow SOLID, DRY, and KISS principles."],
-      ["Can you work with existing codebases or migrate legacy systems?", "Yes, we audit existing codebases and modernize apps from PHP, .NET, or older JavaScript stacks into modern frameworks."]
+      ["Programming languages specialized in?", "Python, JavaScript, TypeScript, PHP, Dart, Kotlin, and Swift, depending on use case."],
+      ["Front-end frameworks used?", "React, Next.js, Vue.js, and Svelte, optimized for responsiveness and speed."],
+      ["Preferred back-end technologies?", "Node.js, Django (Python), Laravel (PHP), and Firebase (serverless)."],
+      ["Mobile app tech (native/cross-platform)?", "Both. Flutter/React Native for cross-platform, Kotlin/Swift for native when needed."],
+      ["Database technologies used?", "PostgreSQL, MySQL, MongoDB, Firebase Realtime DB, and Redis, based on architecture."],
+      ["Do you provide cloud-native architecture?", "Yes, for AWS, GCP, Azure, DigitalOcean with CI/CD, containers, IaC."],
+      ["Microservices or monolithic architecture?", "Yes, we design using microservices for scalability or monoliths for simpler apps."],
+      ["Containerization/DevOps pipelines?", "Absolutely. Docker, Kubernetes, GitHub Actions, GitLab CI/CD, Terraform."],
+      ["Supported CMS systems?", "WordPress, Webflow, Strapi, Ghost, and headless CMS systems."],
+      ["AI/ML integration offered?", "Yes, using Python (TensorFlow, Scikit-learn), OpenAI APIs, chatbots."],
+      ["Analytics/data visualization tools implemented?", "Google Analytics, Amplitude, Mixpanel, dashboards (D3.js, Chart.js)."],
+      ["Coding standards/best practices followed?", "Absolutely. Linting, code reviews, test coverage, SOLID, DRY, KISS principles."],
+      ["Work with existing codebases/legacy systems?", "Yes, we audit existing code and modernize apps from older stacks."]
     ],
-    "Security & Compliance": {
-      "General Security Standards": [
-        ["How does AuraCoreTech ensure software security?", "We follow OWASP Top 10 guidelines, implement secure coding practices, and conduct static/dynamic code analysis throughout development."],
-        ["What encryption protocols do you use?", "We use AES-256 for data-at-rest and TLS 1.2+ for data-in-transit. Sensitive data is hashed using SHA-256 where applicable."],
-        ["Do you conduct vulnerability assessments or penetration testing?", "Yes, we offer periodic security audits, VAPT (Vulnerability Assessment & Penetration Testing), and collaborate with third-party specialists for critical applications."],
-        ["How do you handle secure authentication?", "We implement OAuth 2.0, multi-factor authentication (MFA), JWT-based sessions, and optional biometric login for mobile apps."],
-        ["Do you use secure APIs and role-based access control (RBAC)?", "Yes. All endpoints are access-controlled via RBAC/ABAC, and APIs follow HTTPS, rate-limiting, and token-based authorization."]
-      ],
-      "Data Protection & Compliance": [
-        ["Is AuraCoreTech GDPR compliant?", "Yes, we design systems to be GDPR-compliant — including user consent, data access requests, and the right to be forgotten."],
-        ["How do you comply with CCPA (California Consumer Privacy Act)?", "We provide users transparency, opt-out options, and secure mechanisms for data collection, sharing, and deletion."],
-        ["What about HIPAA compliance for healthcare apps?", "We implement end-to-end encryption, audit trails, role-based access, and secure data storage to meet HIPAA standards."],
-        ["Do you offer SOC 2 compliance support?", "Yes, for enterprise clients, we help prepare and build software aligned with SOC 2 Trust Principles: Security, Availability, Confidentiality, and Privacy."],
-        ["What data retention policies do you follow?", "Data is retained as per project agreements or client-specific regulations, and securely purged post-retention using cryptographic wipe methods."]
-      ],
-      "Infrastructure & DevOps Security": [
-        ["How do you secure cloud infrastructure?", "We configure least-privilege access, use IAM roles, secure keys in vaults (e.g., AWS KMS), and deploy using IaC tools like Terraform."],
-        ["Are backups encrypted and regularly tested?", "Yes. Backups are encrypted at rest, automated, and periodically validated via restore tests."],
-        ["Do you secure CI/CD pipelines?", "Yes. Our pipelines enforce signed commits, pre-deploy checks, security scanning, and secrets management."],
-        ["What is your disaster recovery policy?", "We define RPO/RTO based on business needs, with cross-region backups and fallback environments in place for mission-critical apps."],
-        ["How do you handle breach response?", "We have an incident response protocol: detection → notification → containment → root cause → resolution, with logs for postmortem analysis."]
-      ]
-    },
-    "Support & Post-Deployment Services": {
-      "General Post-Launch Support": [
-        ["What kind of support do you offer after project completion?", "We provide bug fixing, performance monitoring, uptime assurance, feature tweaks, and security patches based on your selected support plan."],
-        ["Is post-deployment support included in the contract?", "Yes. Every project includes a free support window of 30 to 90 days, depending on project scope. Extended support plans are optional."],
-        ["What happens if bugs or issues are found after launch?", "We resolve post-launch issues based on severity levels (critical, major, minor) with dedicated SLAs. Critical bugs are addressed within 24 hours."],
-        ["Can I request small updates or enhancements post-launch?", "Yes. You can request UI changes, content updates, minor feature adjustments, etc., either hourly or via prepaid support credits."],
-        ["How do I report a problem or request support?", "Support tickets can be raised via email, your client portal, or Slack (if integrated). A ticket ID is generated, and status updates are shared automatically."]
-      ],
-      "Maintenance & Monitoring": [
-        ["Do you offer ongoing maintenance services?", "Yes. We offer monthly or quarterly maintenance packages that include performance tuning, cache management, library updates, and system health audits."],
-        ["What’s included in your monitoring solutions?", "We monitor uptime, app errors, server CPU/memory, DB response time, and real-user load using tools like UptimeRobot, New Relic, or Sentry."],
-        ["Can you maintain third-party apps not built by AuraCoreTech?", "Yes. We first audit the app, evaluate codebase health, and then offer a tailored maintenance & support contract."],
-        ["How do you handle updates for third-party libraries or dependencies?", "We track version updates and critical patches weekly, test them in a staging environment, and deploy during maintenance windows."],
-        ["Will I be notified before any backend update or downtime?", "Yes, we provide at least 48 hours’ notice for scheduled maintenance. Emergency patches are communicated in real-time via your preferred channel."]
-      ],
-      "SLA & Response Time Commitments": [
-        ["What are your SLA tiers?", "We offer Basic, Premium, and Enterprise SLAs with guaranteed response/resolution times: Basic: 1–2 business days; Premium: 8–12 hours; Enterprise: 1–4 hours for critical issues."],
-        ["How fast do you respond to support tickets?", "Ticket response time depends on your SLA. However, most queries are acknowledged within 4–6 business hours."],
-        ["Is 24/7 support available?", "24/7 support is available under our Enterprise SLA or custom retainer agreements."]
-      ],
-      "Knowledge Transfer & Handover": [
-        ["What do I receive during final handover?", "You receive source code, admin credentials, documentation, cloud access (if applicable), and deployment instructions."],
-        ["Can I train my in-house team post-handover?", "Yes. We offer onboarding workshops, recorded walkthroughs, and live Q&A support sessions as part of premium packages."]
-      ]
-    }
+    "Security - General Standards": [
+        ["How is software security ensured?", "We follow OWASP Top 10, secure coding practices, and conduct static/dynamic code analysis."],
+        ["Encryption protocols used?", "AES-256 (at-rest), TLS 1.2+ (in-transit), SHA-256 hashing for sensitive data."],
+        ["Vulnerability assessments/penetration testing?", "Yes, periodic security audits, VAPT, collaboration with third-party specialists."],
+        ["How is secure authentication handled?", "OAuth 2.0, MFA, JWT sessions, optional biometric login (mobile)."],
+        ["Secure APIs and RBAC?", "Yes. Endpoints use RBAC/ABAC, APIs follow HTTPS, rate-limiting, token authorization."]
+    ],
+    "Security - Data Protection & Compliance": [
+        ["Is AuraCoreTech GDPR compliant?", "Yes, systems designed for GDPR (consent, data access, right to be forgotten)."],
+        ["CCPA compliance?", "Yes, transparency, opt-out, secure data handling mechanisms."],
+        ["HIPAA compliance for healthcare apps?", "Yes, end-to-end encryption, audit trails, RBAC, secure storage."],
+        ["SOC 2 compliance support?", "Yes, for enterprise clients, aligned with SOC 2 Trust Principles."],
+        ["Data retention policies?", "As per agreements/regulations, secure purge post-retention."]
+    ],
+    "Security - Infrastructure & DevOps": [
+        ["How is cloud infrastructure secured?", "Least-privilege access, IAM roles, key vaults (e.g., AWS KMS), IaC deployment."],
+        ["Are backups encrypted & tested?", "Yes. Encrypted at rest, automated, periodically validated via restore tests."],
+        ["Are CI/CD pipelines secured?", "Yes. Signed commits, pre-deploy checks, security scanning, secrets management."],
+        ["Disaster recovery policy?", "Define RPO/RTO, cross-region backups, fallback environments."],
+        ["Breach response handling?", "Incident response protocol: detection → notification → containment → root cause → resolution, with logs."]
+    ],
+    "Support - General Post-Launch": [
+        ["Support offered after project completion?", "Bug fixing, performance monitoring, uptime assurance, feature tweaks, security patches per plan."],
+        ["Is post-deployment support included?", "Yes, free 30-90 day window included. Extended plans optional."],
+        ["Handling bugs/issues after launch?", "Resolve based on severity (critical, major, minor) with SLAs. Critical bugs addressed within 24 hours."],
+        ["Can I request small updates post-launch?", "Yes, UI changes, content updates, minor features (hourly or via support credits)."],
+        ["How to report problems/request support?", "Via email, client portal, or Slack. Ticket ID generated, status updates shared."]
+    ],
+    "Support - Maintenance & Monitoring": [
+        ["Ongoing maintenance services offered?", "Yes, monthly/quarterly packages (performance tuning, cache management, updates, audits)."],
+        ["What's included in monitoring solutions?", "Uptime, app errors, server resources, DB response, real-user load (UptimeRobot, New Relic, Sentry)."],
+        ["Can you maintain third-party apps?", "Yes, after an audit and codebase evaluation."],
+        ["Handling updates for third-party libraries?", "Track weekly, test in staging, deploy during maintenance windows."],
+        ["Notification before backend updates/downtime?", "Yes, at least 48 hours' notice for scheduled maintenance. Emergency patches communicated real-time."]
+    ],
+    "Support - SLA & Response Time": [
+        ["SLA tiers?", "Basic (1–2 biz days), Premium (8–12 hrs), Enterprise (1–4 hrs critical)."],
+        ["Support ticket response time?", "Depends on SLA, typically acknowledged within 4–6 business hours."],
+        ["Is 24/7 support available?", "Yes, under Enterprise SLA or custom retainers."]
+    ],
+    "Support - Knowledge Transfer & Handover": [
+        ["What's received during final handover?", "Source code, admin credentials, documentation, cloud access, deployment instructions."],
+        ["Can my in-house team be trained?", "Yes, workshops, recorded walkthroughs, Q&A sessions available (premium packages)."]
+    ]
   }
 }
