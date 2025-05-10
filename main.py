@@ -50,6 +50,8 @@ origins = [
     "http://127.0.0.1:8000",
     "http://localhost",
     "http://127.0.0.1",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
     # Add your deployed frontend URL(s) here
     "https://auracoretech.com/",
 ]
