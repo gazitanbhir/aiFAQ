@@ -51,7 +51,7 @@ origins = [
     "http://localhost",
     "http://127.0.0.1",
     # Add your deployed frontend URL(s) here
-    # "https://your-frontend-domain.com",
+    "https://auracoretech.com/",
 ]
 
 app.add_middleware(
