@@ -11,6 +11,14 @@
     ],
     "routes": [
       { "src": "/(.*)", "dest": "main.py" }
+    ],
+
+    "headers": [
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          { "key": "Access-Control-Allow-Origin", "value": "https://auracoretech.com" }
+        ]
+      }
     ]
   }
-  

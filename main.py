@@ -44,16 +44,12 @@ app = FastAPI(
     version="1.4.0", # Incremented for intent handling
 )
 
-# --- CORS Middleware ---
+# In your FastAPI app
 origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    # Add your deployed frontend URL(s) here
-    "https://auracoretech.com/",
+    "https://auracoretech.com",  # Fixed origin
+    "https://ai-faq-red.vercel.app"  # Add if frontend is hosted here
 ]
 
 app.add_middleware(
