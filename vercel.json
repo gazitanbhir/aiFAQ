@@ -1,24 +1,11 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "main.py",
-        "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "50mb"
-        }
-      }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "main.py" }
-    ],
-
-    "headers": [
-      {
-        "source": "/api/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "https://auracoretech.com" }
-        ]
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "main.py" }]
+}
